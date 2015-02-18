@@ -15,6 +15,8 @@
 		887DA44E1A93D0B8007F9D06 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 887DA44D1A93D0B8007F9D06 /* Images.xcassets */; };
 		887DA4511A93D0B8007F9D06 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 887DA44F1A93D0B8007F9D06 /* LaunchScreen.xib */; };
 		887DA45D1A93D0B8007F9D06 /* StretchHeaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 887DA45C1A93D0B8007F9D06 /* StretchHeaderTests.m */; };
+		887DA4691A93D50D007F9D06 /* NewsEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 887DA4681A93D50D007F9D06 /* NewsEntryTableViewCell.m */; };
+		887DA46D1A93E7C8007F9D06 /* NewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 887DA46C1A93E7C8007F9D06 /* NewsItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,10 @@
 		887DA4561A93D0B8007F9D06 /* StretchHeaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StretchHeaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		887DA45B1A93D0B8007F9D06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		887DA45C1A93D0B8007F9D06 /* StretchHeaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StretchHeaderTests.m; sourceTree = "<group>"; };
+		887DA4671A93D50D007F9D06 /* NewsEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsEntryTableViewCell.h; sourceTree = "<group>"; };
+		887DA4681A93D50D007F9D06 /* NewsEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsEntryTableViewCell.m; sourceTree = "<group>"; };
+		887DA46B1A93E7C8007F9D06 /* NewsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsItem.h; sourceTree = "<group>"; };
+		887DA46C1A93E7C8007F9D06 /* NewsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,12 +90,9 @@
 		887DA43C1A93D0B8007F9D06 /* StretchHeader */ = {
 			isa = PBXGroup;
 			children = (
-				887DA4411A93D0B8007F9D06 /* AppDelegate.h */,
-				887DA4421A93D0B8007F9D06 /* AppDelegate.m */,
-				887DA4441A93D0B8007F9D06 /* MasterViewController.h */,
-				887DA4451A93D0B8007F9D06 /* MasterViewController.m */,
-				887DA4471A93D0B8007F9D06 /* DetailViewController.h */,
-				887DA4481A93D0B8007F9D06 /* DetailViewController.m */,
+				887DA46E1A93E7D1007F9D06 /* Model */,
+				887DA46A1A93D523007F9D06 /* View */,
+				887DA4661A93D4DD007F9D06 /* Controller */,
 				887DA44A1A93D0B8007F9D06 /* Main.storyboard */,
 				887DA44D1A93D0B8007F9D06 /* Images.xcassets */,
 				887DA44F1A93D0B8007F9D06 /* LaunchScreen.xib */,
@@ -101,6 +104,8 @@
 		887DA43D1A93D0B8007F9D06 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				887DA4411A93D0B8007F9D06 /* AppDelegate.h */,
+				887DA4421A93D0B8007F9D06 /* AppDelegate.m */,
 				887DA43E1A93D0B8007F9D06 /* Info.plist */,
 				887DA43F1A93D0B8007F9D06 /* main.m */,
 			);
@@ -122,6 +127,35 @@
 				887DA45B1A93D0B8007F9D06 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		887DA4661A93D4DD007F9D06 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				887DA4441A93D0B8007F9D06 /* MasterViewController.h */,
+				887DA4451A93D0B8007F9D06 /* MasterViewController.m */,
+				887DA4471A93D0B8007F9D06 /* DetailViewController.h */,
+				887DA4481A93D0B8007F9D06 /* DetailViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		887DA46A1A93D523007F9D06 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				887DA4671A93D50D007F9D06 /* NewsEntryTableViewCell.h */,
+				887DA4681A93D50D007F9D06 /* NewsEntryTableViewCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		887DA46E1A93E7D1007F9D06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				887DA46B1A93E7C8007F9D06 /* NewsItem.h */,
+				887DA46C1A93E7C8007F9D06 /* NewsItem.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,8 +258,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				887DA4691A93D50D007F9D06 /* NewsEntryTableViewCell.m in Sources */,
 				887DA4431A93D0B8007F9D06 /* AppDelegate.m in Sources */,
 				887DA4461A93D0B8007F9D06 /* MasterViewController.m in Sources */,
+				887DA46D1A93E7C8007F9D06 /* NewsItem.m in Sources */,
 				887DA4401A93D0B8007F9D06 /* main.m in Sources */,
 				887DA4491A93D0B8007F9D06 /* DetailViewController.m in Sources */,
 			);
