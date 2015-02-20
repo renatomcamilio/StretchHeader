@@ -15,11 +15,13 @@
 @property NSMutableArray *objects;
 @property (nonatomic, strong) NSIndexPath *lastSelectedRowIndexPath;
 @property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) CAShapeLayer *headerMaskLayer;
 @end
 
 @implementation MasterViewController
 
 static CGFloat kTableHeaderHeight = 300.f;
+static CGFloat kTableHeaderCutAway = 80.f;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -33,11 +35,21 @@ static CGFloat kTableHeaderHeight = 300.f;
     // We "steal" the tableHeaderView from tableView to manage it soon
     self.headerView = self.tableView.tableHeaderView;
     self.tableView.tableHeaderView = nil;
+    
     // We add tableViewHeader again manually as a child to tableView, so it remains in the view hierarchy
     [self.tableView addSubview:self.headerView];
     
-    self.tableView.contentInset = UIEdgeInsetsMake(kTableHeaderHeight, 0, 0, 0);
-    self.tableView.contentOffset = CGPointMake(0, -kTableHeaderHeight);
+    // Stretchy Header aspects
+    CGFloat effectiveHeight = kTableHeaderHeight - kTableHeaderCutAway / 2;
+    self.tableView.contentInset = UIEdgeInsetsMake(effectiveHeight, 0, 0, 0);
+    self.tableView.contentOffset = CGPointMake(0, -effectiveHeight);
+    
+    // header cutAway
+    self.headerMaskLayer = [CAShapeLayer layer];
+    self.headerMaskLayer.fillColor = [UIColor blackColor].CGColor;
+    self.headerView.layer.mask = self.headerMaskLayer;
+    
+    [self updateHeaderView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -87,13 +99,23 @@ static CGFloat kTableHeaderHeight = 300.f;
 #pragma mark - Header View
 
 - (void)updateHeaderView {
-    CGRect headerRect = CGRectMake(0, -kTableHeaderHeight, self.tableView.bounds.size.width, kTableHeaderHeight);
-    if (self.tableView.contentOffset.y < -kTableHeaderHeight) {
+    CGFloat effectiveHeight = kTableHeaderHeight - kTableHeaderCutAway / 2;
+    CGRect headerRect = CGRectMake(0, -effectiveHeight, self.tableView.bounds.size.width, kTableHeaderHeight);
+    
+    if (self.tableView.contentOffset.y < -effectiveHeight) {
         headerRect.origin.y = self.tableView.contentOffset.y;
-        headerRect.size.height = -self.tableView.contentOffset.y;
+        headerRect.size.height = -self.tableView.contentOffset.y + kTableHeaderCutAway / 2;
     }
     
     self.headerView.frame = headerRect;
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0, 0)];
+    [path addLineToPoint:CGPointMake(headerRect.size.width, 0)];
+    [path addLineToPoint:CGPointMake(headerRect.size.width, headerRect.size.height)];
+    [path addLineToPoint:CGPointMake(0, headerRect.size.height - kTableHeaderCutAway / 1.5)];
+    
+    self.headerMaskLayer.path = path.CGPath;
 }
 
 #pragma mark - Segues
