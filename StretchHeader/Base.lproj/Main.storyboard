@@ -60,25 +60,29 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGR-Dj-wU0">
-                                            <rect key="frame" x="8" y="7" width="57" height="15.5"/>
+                                            <rect key="frame" x="20" y="8" width="527" height="15.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="15.5" id="mZe-5L-16x"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Headline" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CO4-I4-8WU">
-                                            <rect key="frame" x="8" y="28" width="551" height="19"/>
+                                            <rect key="frame" x="20" y="31" width="527" height="19"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="CO4-I4-8WU" firstAttribute="top" secondItem="YGR-Dj-wU0" secondAttribute="bottom" constant="5" id="BXF-6k-aKl"/>
-                                        <constraint firstItem="YGR-Dj-wU0" firstAttribute="top" secondItem="d3P-M7-ByW" secondAttribute="top" constant="7.5" id="N4h-gT-gp9"/>
-                                        <constraint firstItem="YGR-Dj-wU0" firstAttribute="leading" secondItem="d3P-M7-ByW" secondAttribute="leading" constant="8" id="TqW-fH-RfD"/>
-                                        <constraint firstItem="CO4-I4-8WU" firstAttribute="leading" secondItem="d3P-M7-ByW" secondAttribute="leading" constant="8" id="tbL-1G-h9T"/>
-                                        <constraint firstAttribute="trailing" secondItem="CO4-I4-8WU" secondAttribute="trailing" constant="8" id="vTK-0C-zn2"/>
-                                        <constraint firstAttribute="bottom" secondItem="CO4-I4-8WU" secondAttribute="bottom" constant="7.5" id="xZg-bY-Exb"/>
+                                        <constraint firstAttribute="trailing" secondItem="YGR-Dj-wU0" secondAttribute="trailing" constant="20" id="4GU-43-JeZ"/>
+                                        <constraint firstAttribute="trailing" secondItem="CO4-I4-8WU" secondAttribute="trailing" constant="20" id="8Kq-IL-9R4"/>
+                                        <constraint firstItem="CO4-I4-8WU" firstAttribute="leading" secondItem="d3P-M7-ByW" secondAttribute="leading" constant="20" id="JZM-20-Duz"/>
+                                        <constraint firstItem="YGR-Dj-wU0" firstAttribute="leading" secondItem="d3P-M7-ByW" secondAttribute="leading" constant="20" id="KsV-Vp-PXw"/>
+                                        <constraint firstAttribute="bottom" secondItem="CO4-I4-8WU" secondAttribute="bottom" constant="4.5" id="WWd-DT-2lT"/>
+                                        <constraint firstItem="CO4-I4-8WU" firstAttribute="top" secondItem="YGR-Dj-wU0" secondAttribute="bottom" constant="7.5" id="eHS-Ut-raW"/>
+                                        <constraint firstItem="YGR-Dj-wU0" firstAttribute="top" secondItem="d3P-M7-ByW" secondAttribute="top" constant="8" id="ttU-t3-EVZ"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

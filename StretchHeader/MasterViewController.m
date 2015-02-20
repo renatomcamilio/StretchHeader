@@ -13,12 +13,13 @@
 
 @interface MasterViewController ()
 @property NSMutableArray *objects;
+@property (nonatomic, strong) NSIndexPath *lastSelectedRowIndexPath;
 @property (nonatomic, strong) UIView *headerView;
 @end
 
 @implementation MasterViewController
 
-static CGFloat kTableHeaderHeight = 300.0;
+static CGFloat kTableHeaderHeight = 300.f;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -35,14 +36,25 @@ static CGFloat kTableHeaderHeight = 300.0;
     // We add tableViewHeader again manually as a child to tableView, so it remains in the view hierarchy
     [self.tableView addSubview:self.headerView];
     
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    
     self.tableView.contentInset = UIEdgeInsetsMake(kTableHeaderHeight, 0, 0, 0);
     self.tableView.contentOffset = CGPointMake(0, -kTableHeaderHeight);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     self.navigationController.navigationBarHidden = YES;
+    
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 50.f;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.tableView scrollToRowAtIndexPath:self.lastSelectedRowIndexPath
+                          atScrollPosition:UITableViewScrollPositionNone
+                                  animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,14 +65,23 @@ static CGFloat kTableHeaderHeight = 300.0;
 
 - (void)loadObjects {
     self.objects = [NSMutableArray arrayWithArray:@[
-                        [NewsItem newsItemWithCategory:@"World" andHeadline:@"Climate change protests, divestments meet fossil fuels realities"],
-                        [NewsItem newsItemWithCategory:@"Europe" andHeadline:@"Scotland's 'Yes' leader says independence vote is 'once in a lifetime'"],
-                        [NewsItem newsItemWithCategory:@"Middle East" andHeadline:@"Airstrikes boost Islamic State, FBI director warns more hostages possible"],
-                        [NewsItem newsItemWithCategory:@"Africa" andHeadline:@"Nigeria says 70 dead in building collapse; questions S. Africa victim claim"],
-                        [NewsItem newsItemWithCategory:@"Asia Pacific" andHeadline:@"Despite UN ruling, Japan seeks backing for whale hunting"],
-                        [NewsItem newsItemWithCategory:@"Americas" andHeadline:@"Officials: FBI is tracking 100 Americans who fought alongside IS in Syria"],
-                        [NewsItem newsItemWithCategory:@"World" andHeadline:@"South Africa in $40 billion deal for Russian nuclear reactors"],
-                        [NewsItem newsItemWithCategory:@"Europe" andHeadline:@"'One million babies' created by EU student exchanges"]]];
+        [NewsItem newsItemWithCategory:@"World"
+                           andHeadline:@"Climate change protests, divestments meet fossil fuels realities"],
+        [NewsItem newsItemWithCategory:@"Europe"
+                           andHeadline:@"Scotland's 'Yes' leader says independence vote is 'once in a lifetime'"],
+        [NewsItem newsItemWithCategory:@"Middle East"
+                           andHeadline:@"Airstrikes boost Islamic State, FBI director warns more hostages possible"],
+        [NewsItem newsItemWithCategory:@"Africa"
+                           andHeadline:@"Nigeria says 70 dead in building collapse; questions S. Africa victim claim"],
+        [NewsItem newsItemWithCategory:@"Asia Pacific"
+                           andHeadline:@"Despite UN ruling, Japan seeks backing for whale hunting"],
+        [NewsItem newsItemWithCategory:@"Americas"
+                           andHeadline:@"Officials: FBI is tracking 100 Americans who fought alongside IS in Syria"],
+        [NewsItem newsItemWithCategory:@"World"
+                           andHeadline:@"South Africa in $40 billion deal for Russian nuclear reactors"],
+        [NewsItem newsItemWithCategory:@"Europe"
+                           andHeadline:@"'One million babies' created by EU student exchanges"]
+        ]];
 }
 
 #pragma mark - Header View
@@ -87,10 +108,6 @@ static CGFloat kTableHeaderHeight = 300.0;
 
 #pragma mark - Table View
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.objects.count;
 }
@@ -109,11 +126,11 @@ static CGFloat kTableHeaderHeight = 300.0;
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return UITableViewAutomaticDimension;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.lastSelectedRowIndexPath = indexPath;
 }
 
-#pragma mark - Make up
+#pragma mark - Status Bar
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
